@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using TodoList.Data.Models;
 
-namespace TodoList.Data.Models
+namespace TodoList.Models
 {
-    public class ToDo
+    public class AllToDosQueryModel
     {
         public int Id { get; set; }
 
@@ -19,5 +19,7 @@ namespace TodoList.Data.Models
         public DateTime TargetDate { get; set; }
 
         public string UserId { get; set; }
+
+        public ICollection<ToDoFormModel> Tasks { get; set; }
     }
 }
