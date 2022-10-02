@@ -17,11 +17,11 @@ namespace TodoList.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> All([FromQuery] AllToDosQueryModel query)
+        public IActionResult All()
         {
-            var queryResult = await this.toDoService.AllAsync(query);
+            var allTasks = this.toDoService.All();
 
-            return View(query);
+            return View(allTasks);
         }
 
         [Authorize]
@@ -39,7 +39,6 @@ namespace TodoList.Controllers
             var taskData = new ToDoFormModel
             {
                 Description = task.Description,
-                Name = task.Name,
                 IsDone = task.IsDone,
                 Priority = task.Priority,
                 CreatedDate = task.CreatedDate,

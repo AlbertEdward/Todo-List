@@ -1,5 +1,4 @@
-﻿using TodoList.Data.Models;
-using TodoList.Models;
+﻿using TodoList.Models;
 
 namespace TodoList.Services
 {
@@ -7,6 +6,6 @@ namespace TodoList.Services
     {
         void Add(ToDoFormModel task);
 
-        Task<ToDoQueryServiceModel> AllAsync(AllToDosQueryModel task);
+        AllToDosQueryModel All();
     }
 }

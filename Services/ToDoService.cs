@@ -19,7 +19,6 @@ namespace TodoList.Services
             var taskData = new ToDo
             {
                 Id = task.Id,
-                Name = task.Name,
                 Description = task.Description,
                 IsDone = task.IsDone,
                 Priority = task.Priority,
@@ -32,29 +31,28 @@ namespace TodoList.Services
             this.data.SaveChanges();
         }
 
-        public async Task<ToDoQueryServiceModel> AllAsync(string name)
+        public AllToDosQueryModel All()
         {
-            var tasksQuery = this.data.Todos.AsQueryable();
+            var task = this.data.Todos.ToList();
 
-            var totalTasks = await tasksQuery.CountAsync();
+            var totalTasks = task.Count();
 
-            var tasks = tasksQuery
+            var tasks = task
                 .OrderByDescending(t => t.Id)
                 .Select(t => new ToDoFormModel
                 {
-                    Id = task.Id,
-                    Description = task.Description,
-                    IsDone = task.IsDone,
-                    Priority = task.Priority,
-                    CreatedDate = task.CreatedDate,
-                    TargetDate = task.TargetDate,
+                    Id = t.Id,
+                    Description = t.Description,
+                    IsDone = t.IsDone,
+                    Priority = t.Priority,
+                    CreatedDate = t.CreatedDate,
+                    TargetDate = t.TargetDate,
                 })
                 .ToList();
 
-            return new ToDoQueryServiceModel
+            return new AllToDosQueryModel
             {
-                Tasks = tasks,
-                TotalTasks = totalTasks
+                Tasks = tasks
             };
         }
     }
