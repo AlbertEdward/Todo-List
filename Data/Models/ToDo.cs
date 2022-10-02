@@ -12,7 +12,7 @@ namespace TodoList.Data.Models
 
         public Priority Priority { get; set; }
 
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
 
         public DateTime TargetDate { get; set; }
 

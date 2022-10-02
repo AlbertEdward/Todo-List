@@ -51,5 +51,56 @@ namespace TodoList.Controllers
             return RedirectToAction(nameof(All));
         }
 
+        [Authorize]
+        public IActionResult Delete(int id)
+        {
+            this.toDoService.Delete(id);
+
+            return RedirectToAction(nameof(All));
+        }
+
+        [Authorize]
+        public IActionResult Edit(int id)
+        {
+            var task = this.toDoService.Details(id);
+
+            return View(new ToDoFormModel
+            {
+                Id = task.Id,
+                Description = task.Description,
+                Priority = task.Priority,
+                IsDone = task.IsDone,
+                TargetDate = task.TargetDate
+            }); 
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult Edit(int id, ToDoFormModel task)
+        {
+            var taskIsEdited = this.toDoService.Edit(
+                id,
+                task.Description,
+                task.IsDone,
+                task.Priority,
+                task.TargetDate);
+
+            return RedirectToAction(nameof(All));
+        }
+
+        public IActionResult Details(int id)
+        {
+            var task = this.toDoService.Details(id);
+
+            return View(new ToDoFormModel
+            {
+                Id = id,
+                Description = task.Description,
+                Priority = task.Priority,
+                IsDone = task.IsDone,
+                TargetDate = task.TargetDate,
+                CreatedDate = task.CreatedDate
+            });
+        }
     }
 }

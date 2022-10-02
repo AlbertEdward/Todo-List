@@ -3,12 +3,6 @@
 <form method="post" asp-controller="ToDo" asp-action="Add">
     <div class="col md-6 col-4">
         <div class="form-group">
-                <label asp-for="Name" class="text-color-white col-sm-2 col-form-label">Name</label>
-                <textarea asp-for="Name" type="text" class="form-control" placeholder="Enter task name" rows="3"></textarea>
-                <span asp-validation-for="Name" class="small text-danger"></span>
-            </div>
-
-        <div class="form-group">
                 <label asp-for="Description" class="text-color-white col-sm-2 col-form-label">Description</label>
                 <textarea asp-for="Description" type="text" class="form-control" placeholder="Enter more info about tournament" rows="3"></textarea>
                 <span asp-validation-for="Description" class="small text-danger"></span>

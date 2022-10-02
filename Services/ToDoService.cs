@@ -55,5 +55,49 @@ namespace TodoList.Services
                 Tasks = tasks
             };
         }
+
+        public ToDoFormModel Delete(int id)
+        {
+            var task = data.Todos.FirstOrDefault(t => t.Id == id);
+
+            data.Todos.Remove(task);
+
+            data.SaveChanges();
+
+            return new ToDoFormModel();
+        }
+
+        public bool Edit(int id, string description, bool isDone, Priority priority, DateTime targetDate)
+        {
+            var taskData = this.data.Todos.Find(id);
+
+            if (taskData == null)
+            {
+                return false;
+            }
+            
+            taskData.Description = description;
+            taskData.IsDone = isDone;
+            taskData.Priority = priority;
+            taskData.TargetDate = targetDate;
+
+            this.data.SaveChangesAsync();
+
+            return true;
+        }
+
+        public ToDoFormModel Details(int id)
+        => this.data
+            .Todos
+            .Where(t => t.Id == id)
+            .Select(task => new ToDoFormModel
+            {
+                Id = task.Id,
+                Description = task.Description,
+                Priority = task.Priority,
+                IsDone = task.IsDone,
+                TargetDate = task.TargetDate
+            })
+            .FirstOrDefault();
     }
 }
