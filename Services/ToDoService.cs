@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using TodoList.Data;
+﻿using TodoList.Data;
 using TodoList.Data.Models;
 using TodoList.Models;
+
 
 namespace TodoList.Services
 {
@@ -31,13 +31,14 @@ namespace TodoList.Services
             this.data.SaveChanges();
         }
 
-        public AllToDosQueryModel All()
+        public AllToDosQueryModel All(string userId)
         {
             var task = this.data.Todos.ToList();
 
             var totalTasks = task.Count();
 
             var tasks = task
+                .Where(t => t.UserId == userId)
                 .OrderByDescending(t => t.Id)
                 .Select(t => new ToDoFormModel
                 {

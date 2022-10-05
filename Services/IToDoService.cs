@@ -7,7 +7,7 @@ namespace TodoList.Services
     {
         void Add(ToDoFormModel task);
 
-        AllToDosQueryModel All();
+        AllToDosQueryModel All(string userId);
 
         ToDoFormModel Delete(int id);
 

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TodoList.Data.Models;
 using TodoList.Infrastructure;
 using TodoList.Models;
 using TodoList.Services;
@@ -19,7 +18,9 @@ namespace TodoList.Controllers
         [Authorize]
         public IActionResult All()
         {
-            var allTasks = this.toDoService.All();
+            var userId = User.GetId();
+
+            var allTasks = this.toDoService.All(userId);
 
             return View(allTasks);
         }
