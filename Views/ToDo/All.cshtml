@@ -53,7 +53,7 @@
                                             <input type="text" class="form-control form-control-lg" id="exampleFormControlInput1" placeholder="Add new...">
                                             <a href="#!" data-mdb-toggle="tooltip" title="Set due date"><i class="fas fa-calendar-alt fa-lg me-3"></i></a>
                                             <div>
-                                                <a asp-controller="ToDo" asp-action="Add" type="button" class="btn btn-primary">Add</a>
+                                                <a asp-controller="ToDo" asp-action="Add" type="button" id="add-button" class="btn btn-primary">Add</a>
                                             </div>
                                         </div>
                                     </div>
@@ -101,11 +101,13 @@
             </div>
         </div>
     </section>
-    <!-- End your project here-->
-    <!-- MDB -->
-    <script type="text/javascript" src="js/mdb.min.js"></script>
-    <!-- Custom scripts -->
-    <script type="text/javascript"></script>
 </body>
-
 </html>
+
+@section Scripts{
+<script>
+    $.get('/ToDo/All', (data) =>{
+        console.log(data);
+    }
+</script>
+}
