@@ -27,9 +27,23 @@ namespace TodoList.Controllers.Api
 
         [HttpPost]
         [Route("add")]
-        public IActionResult Add()
+        public JsonResult Add(ToDoFormModel task)
         {
-            return Ok();
+            var userId = this.User.GetId();
+
+            var taskData = new ToDoFormModel
+            {
+                Description = task.Description,
+                IsDone = task.IsDone,
+                Priority = task.Priority,
+                CreatedDate = task.CreatedDate,
+                TargetDate = task.TargetDate,
+                UserId = userId
+            };
+
+            this.toDoService.Add(taskData);
+
+            return Json(taskData);
         }
 
         [HttpDelete]
